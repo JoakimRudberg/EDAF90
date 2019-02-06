@@ -1,1 +1,1 @@
-del 1 av labb 2 i kursen webbprogrammering
+# Labb 2 - del 1
