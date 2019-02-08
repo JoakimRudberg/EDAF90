@@ -8,20 +8,19 @@ class Salad {
         }
       }
 
-    add(ingredient){
-        if (ingredient.foundation){
-            this.ingredients.foundation.push(ingredient);
-        }
-        if (ingredient.protein){
-            this.ingredients.protein.push(ingredient);
-        }
-        if (ingredient.extra){
-            this.ingredients.extra.push(ingredient);
-        }
-        if (ingredient.dressing){
-            this.ingredients.dressing.push(ingredient);
-        }
+    addFoundation(ingredient){
+        this.ingredients.foundation.push(ingredient);
     }
+    addProtein(ingredient){
+        this.ingredients.protein.push(ingredient);
+    }
+    addExtra(ingredient){
+        this.ingredients.extra.push(ingredient);
+    }
+    addDressing(ingredient){
+        this.ingredients.dressing.push(ingredient);
+    }
+    
     
     remove(ingredient){
         if (ingredient.foundation){
@@ -47,6 +46,19 @@ class Salad {
         }, 0);
         console.log("Total price: " + totalPrice);
     }
+    print(){
+        alert(
+            "Foundations: " +
+              this.ingredients.foundation +
+              "\nProteins: " +
+              this.ingredients.protein +
+              "\nExtras: " +
+              this.ingredients.extra +
+              "\nDressing: " +
+              this.ingredients.dressing
+      );
+    }
+
 }
 
 export default Salad;

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import Salad from "./Salad";
 
 class ComposeSalad extends Component {
     constructor(props) {
         super(props);
-        this.state = {foundation: '', protein: [], extra: [], dressing: ''};
+        this.state = {foundation: '', protein: [], extra: [], dressing: '', salad: new Salad()};
     
         this.handleFoundationChange = this.handleFoundationChange.bind(this);
         this.handleProteinChange = this.handleProteinChange.bind(this);
@@ -17,18 +18,23 @@ class ComposeSalad extends Component {
     }
 
     handleProteinChange(event){
-        let newState;
-        if (this.state.protein.indexOf(event.target.name)>-1){
-            newState = this.state.protein.filter(protein => protein !== event.target.name)
-        } else {
-            newState = this.state.protein;
-            newState.push(event.target.name);
-        }
-        this.setState({protein: newState})
+    let newList = [...this.state.protein]
+       if (!event.target.checked){
+        newList = newList.filter(name => (name != event.target.value));
+       } else {
+        newList.push(event.target.value);
+       }
+       this.setState({protein: newList});
     }
 
     handleExtraChange(event){
-        this.setState({extra: event.target.value});
+    let newList = [...this.state.extra]
+        if (!event.target.checked){
+         newList = newList.filter(name => (name != event.target.value));
+        } else {
+         newList.push(event.target.value);
+        }
+        this.setState({extra: newList});
     }
 
     handleDressingChange(event) {
@@ -36,13 +42,17 @@ class ComposeSalad extends Component {
     }
     
     handleSubmit(event) {
-        alert('Your salad was submitted: ' + this.state.foundation + " " + this.state.protein +  " " + this.state.extra + " "+ this.state.dressing);
+        this.buildSalad();
+        //alert('Your salad was submitted: ' + this.state.foundation + " " + this.state.protein +  " " + this.state.extra + " "+ this.state.dressing);
         event.preventDefault();
-        //buildSalad();
     }
 
     buildSalad(){
-        
+        this.state.salad.addFoundation(this.state.foundation);
+        this.state.protein.map(p => this.state.salad.addProtein(p));
+        this.state.extra.map(e => this.state.salad.addExtra(e));
+        this.state.salad.addDressing(this.state.dressing);
+        this.state.salad.print();
     }
     
     render() {
@@ -55,19 +65,46 @@ class ComposeSalad extends Component {
       let extras = Object.keys(inventory).filter(name => inventory[name].extra);
       let dressings = Object.keys(inventory).filter(name => inventory[name].dressing);
       return (
-        <form className="container" onSubmit={this.handleSubmit}>
-        <h4>Välj bas</h4>
-                <select value={this.state.foundation} onChange={this.handleFoundationChange}>
-                    {foundations.map(name => (<option key={name} value={name}>{name + " +" + inventory[name].price + " kr"}</option>))}
-                </select>
-            <h4>Välj protein</h4>
-                <ul> 
-                    {proteins.map(name => (<li key={name}><input onChange={this.handleProteinChange} type="Checkbox" value={name} id="check"></input>{" " + name + " +" + inventory[name].price + " kr"}</li>))}
-                </ul>
-            <h4>Välj extra</h4>
-                <ul>
-                    {extras.map(name => (<li key={name}><input onChange={this.handleExtraChange} type="Checkbox" value={name}></input>{" " + name + " +" + inventory[name].price + " kr"}</li>))}
-                 </ul>
+        <div className="container">
+            <form onSubmit={this.handleSubmit}>
+                <h4>Välj bas</h4>
+                    <select value={this.state.foundation} onChange={this.handleFoundationChange}>
+                        <option disabled selected value> -- Select a foundation -- </option>
+                        {foundations.map(name => (<option>{name + " +" + inventory[name].price + " kr"}</option>))}
+                    </select>    
+
+                <h4>Välj protein</h4>
+                    <ul> 
+                        {proteins.map(name => (
+                            <li key={name}>
+                            <input 
+                            type="Checkbox" 
+                            name="protein"
+                            value={name} 
+                            checked={this.state.protein.includes(name)}
+                            onChange={this.handleProteinChange} 
+                            />
+                            {" " + name + " +" + inventory[name].price + " kr"}</li>
+                    
+                        ))}
+                    </ul>
+
+                <h4>Välj extra</h4>
+                    <ul> 
+                        {extras.map(name => (
+                            <li key={name}>
+                            <input 
+                            type="Checkbox" 
+                            name="extra"
+                            value={name} 
+                            checked={this.state.extra.includes(name)}
+                            onChange={this.handleExtraChange} 
+                            />
+                            {" " + name + " +" + inventory[name].price + " kr"}</li>
+                    
+                        ))}
+                    </ul>
+                
             <h4>Välj dressing</h4>
                 <select value={this.state.dressing} onChange={this.handleDressingChange}>
                     {dressings.map(name => (<option key={name} value={name}>{name + " +" + inventory[name].price + " kr"}</option>))}
@@ -76,6 +113,7 @@ class ComposeSalad extends Component {
                 <button
                   type="submit"
                   className="btn btn-primary"
+                  value="Submit"
                 >
                   Lägg till sallad
                 </button>
@@ -89,6 +127,7 @@ class ComposeSalad extends Component {
                 </button>
             </div>
         </form>
+        </div>
       );
     }
   }
