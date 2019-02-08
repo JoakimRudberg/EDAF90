@@ -9,26 +9,30 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {list: []};
-    this.createSallad = this.createSallad.bind(this);
+    this.handleSaladSubmit = this.handleSaladSubmit.bind(this);
   }
-    createSallad(f, p , e, d){
-      let temp = this.state.list
+    handleSaladSubmit(f, p , e, d){
+      
+      let temp = [...this.state.list]
       let ID = this.state.list.length;
       temp.push({id: ID, foundation: f, protein: p, extra: e, dressing: d});
       this.setState({list: temp});
-  }
-  
+      document.getElementById("demo").innerHTML = this.state.list.length+1;
+    }
+
   render() {
     return (
       <div>
         <div className="jumbotron text-center">
           <h1>My Own Salad Bar</h1>
-          <p>Here you can order custom made salads!</p> 
+          <p>Here you can order custom made salads! {this.state.list.foundation}</p> 
         </div>
         <div>
-          <ComposeSaladModal inventory={inventory}/>
+          <ComposeSalad inventory={inventory} handleSaladSubmit={this.handleSaladSubmit}/>
         </div>
-      
+        <div>
+          <p id="demo"></p>
+        </div>
       </div>
     );
   }

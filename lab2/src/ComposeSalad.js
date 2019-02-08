@@ -55,9 +55,10 @@ class ComposeSalad extends Component {
         this.state.salad.addDressing(this.state.dressing);
         this.state.salad.print();
         
-        const newSalad = this.props.newSalad;
-        newSalad(this.state.foundation, this.state.protein, this.state.extra, this.state.salad);
-        
+        //const newSalad = this.props.newSalad;
+        //newSalad(this.state.foundation, this.state.protein, this.state.extra, this.state.salad);
+        this.props.handleSaladSubmit(this.state.foundation, this.state.protein, this.state.extra, this.state.dressing);
+
         this.setState({
             foundation: '',
             protein: [],
