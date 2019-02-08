@@ -6,6 +6,18 @@ import ComposeSalad from './ComposeSalad';
 import ComposeSaladModal from "./ComposeSaladModal";
 
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {list: []};
+    this.createSallad = this.createSallad.bind(this);
+  }
+    createSallad(f, p , e, d){
+      let temp = this.state.list
+      let ID = this.state.list.length;
+      temp.push({id: ID, foundation: f, protein: p, extra: e, dressing: d});
+      this.setState({list: temp});
+  }
+  
   render() {
     return (
       <div>
@@ -14,14 +26,10 @@ class App extends Component {
           <p>Here you can order custom made salads!</p> 
          </div>
         <div>
-          <ComposeSaladModal inventory={inventory}/>
+          <ComposeSaladModal handleNewSallad={this.handleNewSallad} inventory={inventory}/>
       </div>
     </div>
     );
-  }
-
-  createSallad(){
-    
   }
 }
 
