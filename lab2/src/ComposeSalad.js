@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Salad from "./Salad";
 
+
 class ComposeSalad extends Component {
     constructor(props) {
         super(props);
@@ -47,11 +48,15 @@ class ComposeSalad extends Component {
     }
 
     buildSalad(){
+    
         this.state.salad.addFoundation(this.state.foundation);
         this.state.protein.map(p => this.state.salad.addProtein(p));
         this.state.extra.map(e => this.state.salad.addExtra(e));
         this.state.salad.addDressing(this.state.dressing);
         this.state.salad.print();
+        
+        const newSalad = this.props.newSalad;
+        newSalad(this.state.foundation, this.state.protein, this.state.extra, this.state.salad);
         
         this.setState({
             foundation: '',

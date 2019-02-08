@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './App.css';
 import inventory from './inventory.ES6';
 import ComposeSalad from './ComposeSalad';
 import ComposeSaladModal from "./ComposeSaladModal";
+import './App.css'
 
 class App extends Component {
   constructor(props){
@@ -24,11 +24,12 @@ class App extends Component {
         <div className="jumbotron text-center">
           <h1>My Own Salad Bar</h1>
           <p>Here you can order custom made salads!</p> 
-         </div>
+        </div>
         <div>
-          <ComposeSaladModal handleNewSallad={this.handleNewSallad} inventory={inventory}/>
+          <ComposeSaladModal inventory={inventory}/>
+        </div>
+      
       </div>
-    </div>
     );
   }
 }
