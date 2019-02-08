@@ -69,7 +69,7 @@ class ComposeSalad extends Component {
             <form onSubmit={this.handleSubmit}>
                 <h4>Välj bas</h4>
                     <select value={this.state.foundation} onChange={this.handleFoundationChange}>
-                        <option disabled selected value> -- Select a foundation -- </option>
+                        <option defaultValue value=""> -- Välj en bas -- </option>
                         {foundations.map(name => (<option>{name + " +" + inventory[name].price + " kr"}</option>))}
                     </select>    
 
@@ -107,6 +107,7 @@ class ComposeSalad extends Component {
                 
             <h4>Välj dressing</h4>
                 <select value={this.state.dressing} onChange={this.handleDressingChange}>
+                    <option defaultValue value=""> -- Välj en dressing -- </option>
                     {dressings.map(name => (<option key={name} value={name}>{name + " +" + inventory[name].price + " kr"}</option>))}
                 </select>  
             <div className="modal-footer">
