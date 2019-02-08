@@ -43,7 +43,6 @@ class ComposeSalad extends Component {
     
     handleSubmit(event) {
         this.buildSalad();
-        //alert('Your salad was submitted: ' + this.state.foundation + " " + this.state.protein +  " " + this.state.extra + " "+ this.state.dressing);
         event.preventDefault();
     }
 
@@ -53,7 +52,14 @@ class ComposeSalad extends Component {
         this.state.extra.map(e => this.state.salad.addExtra(e));
         this.state.salad.addDressing(this.state.dressing);
         this.state.salad.print();
-        this.state.salad = new Salad();
+        
+        this.setState({
+            foundation: '',
+            protein: [],
+            extra: [],
+            dressing: '',
+            salad: new Salad()
+        });
     }
     
     render() {
