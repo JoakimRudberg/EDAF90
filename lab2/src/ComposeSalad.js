@@ -53,6 +53,7 @@ class ComposeSalad extends Component {
         this.state.extra.map(e => this.state.salad.addExtra(e));
         this.state.salad.addDressing(this.state.dressing);
         this.state.salad.print();
+        this.state.salad = new Salad();
     }
     
     render() {
@@ -67,10 +68,11 @@ class ComposeSalad extends Component {
       return (
         <div className="container">
             <form onSubmit={this.handleSubmit}>
+
                 <h4>Välj bas</h4>
                     <select value={this.state.foundation} onChange={this.handleFoundationChange}>
                         <option defaultValue value=""> -- Välj en bas -- </option>
-                        {foundations.map(name => (<option>{name + " +" + inventory[name].price + " kr"}</option>))}
+                        {foundations.map(name => (<option key={name} value={name}>{name + " +" + inventory[name].price + " kr"}</option>))}
                     </select>    
 
                 <h4>Välj protein</h4>
@@ -110,6 +112,7 @@ class ComposeSalad extends Component {
                     <option defaultValue value=""> -- Välj en dressing -- </option>
                     {dressings.map(name => (<option key={name} value={name}>{name + " +" + inventory[name].price + " kr"}</option>))}
                 </select>  
+
             <div className="modal-footer">
                 <button
                   type="submit"
@@ -118,11 +121,11 @@ class ComposeSalad extends Component {
                 >
                   Lägg till sallad
                 </button>
+
                 <button
                   type="button"
                   className="btn btn-danger"
                   data-dismiss="modal"
-                  
                 >
                   Stäng fönstret
                 </button>
