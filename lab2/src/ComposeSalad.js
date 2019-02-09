@@ -48,15 +48,12 @@ class ComposeSalad extends Component {
     }
 
     buildSalad(){
-    
         this.state.salad.addFoundation(this.state.foundation);
         this.state.protein.map(p => this.state.salad.addProtein(p));
         this.state.extra.map(e => this.state.salad.addExtra(e));
         this.state.salad.addDressing(this.state.dressing);
         this.state.salad.print();
-        
-        //const newSalad = this.props.newSalad;
-        //newSalad(this.state.foundation, this.state.protein, this.state.extra, this.state.salad);
+
         this.props.handleSaladSubmit(this.state.foundation, this.state.protein, this.state.extra, this.state.dressing);
 
         this.setState({
@@ -119,30 +116,30 @@ class ComposeSalad extends Component {
                         ))}
                     </ul>
                 
-            <h4>Välj dressing</h4>
-                <select value={this.state.dressing} onChange={this.handleDressingChange}>
-                    <option defaultValue value=""> -- Välj en dressing -- </option>
-                    {dressings.map(name => (<option key={name} value={name}>{name + " +" + inventory[name].price + " kr"}</option>))}
-                </select>  
+                <h4>Välj dressing</h4>
+                    <select value={this.state.dressing} onChange={this.handleDressingChange}>
+                        <option defaultValue value=""> -- Välj en dressing -- </option>
+                        {dressings.map(name => (<option key={name} value={name}>{name + " +" + inventory[name].price + " kr"}</option>))}
+                    </select>  
 
-            <div className="modal-footer">
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  value="Submit"
-                >
-                  Lägg till sallad
-                </button>
+                <div className="modal-footer">
+                    <button
+                    type="submit"
+                    className="btn btn-primary"
+                    value="Submit"
+                    >
+                    Lägg till sallad
+                    </button>
 
-                <button
-                  type="button"
-                  className="btn btn-danger"
-                  data-dismiss="modal"
-                >
-                  Stäng fönstret
-                </button>
-            </div>
-        </form>
+                    <button
+                    type="button"
+                    className="btn btn-danger"
+                    data-dismiss="modal"
+                    >
+                    Stäng fönstret
+                    </button>
+                </div>
+            </form>
         </div>
       );
     }
