@@ -15,7 +15,7 @@ class App extends Component {
   
     handleSaladSubmit(f, p , e, d){
       let temp = [...this.state.list]
-      let ID = this.state.list.length;
+      let ID = this.state.list.length+1;
       temp.push({OrderID: ID, foundation: f, protein: p, extra: e, dressing: d});
       this.setState({list: temp})
     }
