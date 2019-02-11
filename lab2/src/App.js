@@ -4,6 +4,8 @@ import ComposeSalad from './ComposeSalad';
 //import ComposeSaladModal from "./ComposeSaladModal";
 import ViewOrder from "./ViewOrder";
 import './App.css'
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
 
 class App extends Component {
   constructor(props){
@@ -27,18 +29,27 @@ class App extends Component {
     }
 
   render() {
+    const composeSaladElem = (params) => <ComposeSalad {...params} inventory={inventory} handleSaladSubmit={this.handleSaladSubmit}/>;
+    const viewOrderElem = (params) => <ViewOrder {...params} inputSalad={this.state.list} handleSaladRemove={this.handleSaladRemove}/>;
     return (
       <div>
         <div className="jumbotron text-center">
           <h1>My Own Salad Bar</h1>
           <p>Here you can order custom made salads! {this.state.list.foundation}</p> 
         </div>
+        <Router>
         <div>
-          <ComposeSalad inventory={inventory} handleSaladSubmit={this.handleSaladSubmit}/>
+        
+          <ul className="nav nav-pills">
+            <li className="nav-item">
+              <Link className="nav-link" to='compose-salad'>Komponera din egen sallad</Link>
+              <Link className="nav-link" to='view-order'>Se din beställning</Link>
+            </li>
+          </ul>
+          <Route path='/compose-salad' render={composeSaladElem}/>
+          <Route path='/view-order' render={viewOrderElem}/>
         </div>
-        <div>
-          <ViewOrder inputSalad={this.state.list} handleSaladRemove={this.handleSaladRemove}></ViewOrder>
-        </div>
+        </Router>
       </div>
     );
   }

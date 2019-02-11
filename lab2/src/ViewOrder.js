@@ -1,6 +1,9 @@
 import React, { Component } from 'react'; 
 
 class ViewOrder extends Component {
+  constructor(props){
+    super(props);
+  }
 
     render() {
       return (
