@@ -48,14 +48,15 @@ class Salad {
     }
     print(){
         return( 
-            "Foundations: " +
-              this.ingredients.foundation +
-              "\nProteins: " +
+            " Foundation: " +
+              this.ingredients.foundation + 
+              ", Proteins: " +
               this.ingredients.protein +
-              "\nExtras: " +
+              ", Extras: " +
               this.ingredients.extra +
-              "\nDressing: " +
+              ", Dressing: " +
               this.ingredients.dressing
+              + " "
       );
     }
 
