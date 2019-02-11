@@ -28,10 +28,20 @@ ul {
 
 .list-group {
   line-height:30px;
+  margin-inline-end: 20%;
 }
 
 .btn-danger {
   float: right;
+}
+
+.form-div {
+  margin-inline-start: 20%;
+  margin-inline-end: 20%
+}
+
+.container {
+  margin-inline-start: 20%;
 }
 
 @keyframes App-logo-spin {

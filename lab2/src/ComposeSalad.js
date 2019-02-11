@@ -43,11 +43,12 @@ class ComposeSalad extends Component {
     }
     
     handleSubmit(event) {
-        if(event.target.checkValidity() === false){
+        if(event.target.checkValidity() === true){
             this.buildSalad();
-            event.preventDefault();
+            this.props.history.push('/view-order');
             event.target.classList.add("was-validated");
         }
+        event.preventDefault();
     }
 
     buildSalad(){
@@ -78,7 +79,7 @@ class ComposeSalad extends Component {
       let dressings = Object.keys(inventory).filter(name => inventory[name].dressing);
       return (
         <div className="form-group">
-            <form onSubmit={this.handleSubmit} noValidate >
+            <form className="form-div" onSubmit={this.handleSubmit} noValidate >
 
                 <h4>Välj bas</h4>
                     <select required className="form-control" value={this.state.foundation} onChange={this.handleFoundationChange}>
@@ -120,7 +121,7 @@ class ComposeSalad extends Component {
                     </ul>
                 
                 <h4>Välj dressing</h4>
-                    <select required value={this.state.dressing} onChange={this.handleDressingChange}>
+                    <select required className="form-control" value={this.state.dressing} onChange={this.handleDressingChange}>
                         <option defaultValue value=""> -- Välj en dressing -- </option>
                         {dressings.map(name => (<option key={name} value={name}>{name + " +" + inventory[name].price + " kr"}</option>))}
                     </select>  
