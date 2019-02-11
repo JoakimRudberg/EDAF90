@@ -43,8 +43,11 @@ class ComposeSalad extends Component {
     }
     
     handleSubmit(event) {
-        this.buildSalad();
-        event.preventDefault();
+        if(event.target.checkValidity() === false){
+            this.buildSalad();
+            event.preventDefault();
+            event.target.classList.add("was-validated");
+        }
     }
 
     buildSalad(){
@@ -74,14 +77,15 @@ class ComposeSalad extends Component {
       let extras = Object.keys(inventory).filter(name => inventory[name].extra);
       let dressings = Object.keys(inventory).filter(name => inventory[name].dressing);
       return (
-        <div className="container">
-            <form onSubmit={this.handleSubmit}>
+        <div className="form-group">
+            <form onSubmit={this.handleSubmit} noValidate >
 
                 <h4>Välj bas</h4>
-                    <select value={this.state.foundation} onChange={this.handleFoundationChange}>
+                    <select required className="form-control" value={this.state.foundation} onChange={this.handleFoundationChange}>
                         <option defaultValue value=""> -- Välj en bas -- </option>
                         {foundations.map(name => (<option key={name} value={name}>{name + " +" + inventory[name].price + " kr"}</option>))}
-                    </select>    
+                    </select>
+                    <div className="invalid-feedback">required, select one</div>    
 
                 <h4>Välj protein</h4>
                     <ul> 
@@ -116,7 +120,7 @@ class ComposeSalad extends Component {
                     </ul>
                 
                 <h4>Välj dressing</h4>
-                    <select value={this.state.dressing} onChange={this.handleDressingChange}>
+                    <select required value={this.state.dressing} onChange={this.handleDressingChange}>
                         <option defaultValue value=""> -- Välj en dressing -- </option>
                         {dressings.map(name => (<option key={name} value={name}>{name + " +" + inventory[name].price + " kr"}</option>))}
                     </select>  
