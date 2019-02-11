@@ -21,7 +21,7 @@ class ComposeSalad extends Component {
     handleProteinChange(event){
     let newList = [...this.state.protein]
        if (!event.target.checked){
-        newList = newList.filter(name => (name != event.target.value));
+        newList = newList.filter(name => (name !== event.target.value));
        } else {
         newList.push(event.target.value);
        }
@@ -31,7 +31,7 @@ class ComposeSalad extends Component {
     handleExtraChange(event){
     let newList = [...this.state.extra]
         if (!event.target.checked){
-         newList = newList.filter(name => (name != event.target.value));
+         newList = newList.filter(name => (name !== event.target.value));
         } else {
          newList.push(event.target.value);
         }

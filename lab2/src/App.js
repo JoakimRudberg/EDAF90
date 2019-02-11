@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import inventory from './inventory.ES6';
 import ComposeSalad from './ComposeSalad';
-import ComposeSaladModal from "./ComposeSaladModal";
+//import ComposeSaladModal from "./ComposeSaladModal";
 import ViewOrder from "./ViewOrder";
 import './App.css'
 

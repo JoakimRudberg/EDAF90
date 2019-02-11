@@ -1,10 +1,6 @@
-import React, { Component } from 'react';
-import $ from 'jquery';     
+import React, { Component } from 'react'; 
 
 class ViewOrder extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
       return (
