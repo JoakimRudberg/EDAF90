@@ -11,13 +11,20 @@ class App extends Component {
     super(props);
     this.state = {list: []};
     this.handleSaladSubmit = this.handleSaladSubmit.bind(this);
+    this.handleSaladRemove = this.handleSaladRemove.bind(this);
   }
   
-    handleSaladSubmit(f, p , e, d){
+    handleSaladSubmit(s){
       let temp = [...this.state.list]
-      let ID = this.state.list.length+1;
-      temp.push({OrderID: ID, foundation: f, protein: p, extra: e, dressing: d});
+      temp.push(s);
       this.setState({list: temp})
+    }
+
+    handleSaladRemove(s){
+      let temp = [...this.state.list];
+      let index = temp.indexOf(s);
+      temp.splice(index, 1);
+      this.setState({list: temp});
     }
 
   render() {
@@ -31,7 +38,7 @@ class App extends Component {
           <ComposeSalad inventory={inventory} handleSaladSubmit={this.handleSaladSubmit}/>
         </div>
         <div>
-          <ViewOrder inputSalad={this.state.list}></ViewOrder>
+          <ViewOrder inputSalad={this.state.list} handleSaladRemove={this.handleSaladRemove}></ViewOrder>
         </div>
       </div>
     );

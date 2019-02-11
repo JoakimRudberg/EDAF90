@@ -10,25 +10,17 @@ class ViewOrder extends Component {
       return (
     <div className="container">
         <div>
-          <h4 id="r2">{this.getOrderSize()}</h4>
+          <h4 id="r2">{"Antal ordrar: "+ this.props.inputSalad.length}</h4>
         </div>
         <div class="list-group">
          <ol id="orders">
-         
+          {this.props.inputSalad.map(s => 
+            <li key={s} class='list-group-item clearfix' >{s.print()}<button type='button' className='btn btn-danger' onClick={() => this.props.handleSaladRemove(s)}>Ta bort</button></li>)}
         </ol>
         </div>  
     </div>
       )
     }
-
-    getOrderSize(){
-        let size = this.props.inputSalad.length;
-        let sizeArray = "Antal ordrar: " + size;
-        $("ol").append("<li class='list-group-item clearfix'>"+JSON.stringify(this.props.inputSalad.slice(size-1))+"<button type='button'>Ta bort</button</li>");
-
-        return sizeArray;
-    }
-
 }
 
 export default ViewOrder;

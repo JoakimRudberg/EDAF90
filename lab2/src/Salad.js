@@ -47,7 +47,7 @@ class Salad {
         console.log("Total price: " + totalPrice);
     }
     print(){
-        alert(
+        return( 
             "Foundations: " +
               this.ingredients.foundation +
               "\nProteins: " +

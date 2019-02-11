@@ -52,9 +52,8 @@ class ComposeSalad extends Component {
         this.state.protein.map(p => this.state.salad.addProtein(p));
         this.state.extra.map(e => this.state.salad.addExtra(e));
         this.state.salad.addDressing(this.state.dressing);
-        this.state.salad.print();
 
-        this.props.handleSaladSubmit(this.state.foundation, this.state.protein, this.state.extra, this.state.dressing);
+        this.props.handleSaladSubmit(this.state.salad);
 
         this.setState({
             foundation: '',
