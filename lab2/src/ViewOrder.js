@@ -11,7 +11,7 @@ class ViewOrder extends Component {
         <div className="list-group">
          <ol id="orders">
           {this.props.inputSalad.map(s => 
-            <li key={s} className='list-group-item clearfix' >{s.print()}<button type='button' className='btn btn-danger' onClick={() => this.props.handleSaladRemove(s)}>Ta bort sallad</button></li>)}
+            <li key={this.props.inputSalad.indexOf(s)} className='list-group-item clearfix' >{s.print()}<button type='button' className='btn btn-danger' onClick={() => this.props.handleSaladRemove(s)}>Ta bort sallad</button></li>)}
         </ol>
         </div>  
     </div>
