@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import inventory from './inventory.ES6';
 import ComposeSalad from './ComposeSalad';
+import 'bootstrap/dist/css/bootstrap.css';
+import "bootstrap/dist/js/bootstrap.js"; 
 //import ComposeSaladModal from "./ComposeSaladModal";
 import ViewOrder from "./ViewOrder";
 import './App.css'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-
 
 class App extends Component {
   constructor(props){
@@ -34,8 +35,8 @@ class App extends Component {
     return (
       <div>
         <div className="jumbotron text-center">
-          <h1>My Own Salad Bar</h1>
-          <p>Here you can order custom made salads! {this.state.list.foundation}</p> 
+          <h1>Min egna salladsbar</h1>
+          <p>Här kan du beställa sallader! {this.state.list.foundation}</p> 
         </div>
         <Router>
         <div>
@@ -43,6 +44,8 @@ class App extends Component {
           <ul className="nav nav-pills">
             <li className="nav-item">
               <Link className="nav-link" to='compose-salad'>Komponera din egen sallad</Link>
+              </li>
+              <li className="nav-item">
               <Link className="nav-link" to='view-order'>Se din beställning</Link>
             </li>
           </ul>

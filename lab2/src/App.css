@@ -26,22 +26,53 @@ ul {
   list-style-type: none;
 }
 
-.list-group {
-  line-height:30px;
-  margin-inline-end: 20%;
+.nav-pills{
+  list-style-type: none;
+  margin-top: -32px;
+  margin-bottom: 20px;
+  padding: 0;
+  overflow: hidden;
+  background-color: #1050cf27
 }
 
-.btn-danger {
-  float: right;
+.nav-link{
+  border-right: 1px solid #bbb;
+  display: block;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
 }
 
-.form-div {
-  margin-inline-start: 20%;
-  margin-inline-end: 20%
+.nav-link:hover{
+  background-color: rgba(255, 255, 255, 0.795);
 }
 
 .container {
+  box-align: center;
+}
+
+.r2{
+  text-align: left;
+}
+
+.list-group {
+  line-height: auto;
+  box-align: center;
+}
+.list-group-item{
+  margin-inline-start: -40px;
+  margin-right: 150px;
+}
+
+.btn-danger {
+  margin-right: -150px;
+  float: right;
+}
+
+.form-group {
   margin-inline-start: 20%;
+  margin-inline-end: 20%
 }
 
 @keyframes App-logo-spin {

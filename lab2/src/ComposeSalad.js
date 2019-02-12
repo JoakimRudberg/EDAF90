@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Salad from "./Salad";
-
+import 'bootstrap/dist/css/bootstrap.css';
+import "bootstrap/dist/js/bootstrap.js"; 
 
 class ComposeSalad extends Component {
     constructor(props) {
@@ -46,8 +47,8 @@ class ComposeSalad extends Component {
         if(event.target.checkValidity() === true){
             this.buildSalad();
             this.props.history.push('/view-order');
-            event.target.classList.add("was-validated");
         }
+        event.target.classList.add("was-validated");
         event.preventDefault();
     }
 
@@ -86,7 +87,7 @@ class ComposeSalad extends Component {
                         <option defaultValue value=""> -- Välj en bas -- </option>
                         {foundations.map(name => (<option key={name} value={name}>{name + " +" + inventory[name].price + " kr"}</option>))}
                     </select>
-                    <div className="invalid-feedback">required, select one</div>    
+                    <div className="invalid-feedback">Obligatoriskt, välj en bas</div>    
 
                 <h4>Välj protein</h4>
                     <ul> 
@@ -124,7 +125,8 @@ class ComposeSalad extends Component {
                     <select required className="form-control" value={this.state.dressing} onChange={this.handleDressingChange}>
                         <option defaultValue value=""> -- Välj en dressing -- </option>
                         {dressings.map(name => (<option key={name} value={name}>{name + " +" + inventory[name].price + " kr"}</option>))}
-                    </select>  
+                    </select>
+                    <div className="invalid-feedback">Obligatoriskt, välj en dressing</div>    
 
                 <div className="modal-footer">
                     <button
