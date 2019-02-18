@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import inventory from './inventory.ES6';
 import ComposeSalad from './ComposeSalad';
 import 'bootstrap/dist/css/bootstrap.css';
 import "bootstrap/dist/js/bootstrap.js"; 
@@ -11,7 +10,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 class App extends Component {
   constructor(props){
     super(props);
-    this.state = {list: []};
+    this.state = {list: [], inventory: {}};
     this.handleSaladSubmit = this.handleSaladSubmit.bind(this);
     this.handleSaladRemove = this.handleSaladRemove.bind(this);
   }
@@ -30,7 +29,7 @@ class App extends Component {
     }
 
   render() {
-    const composeSaladElem = (params) => <ComposeSalad {...params} inventory={inventory} handleSaladSubmit={this.handleSaladSubmit}/>;
+    const composeSaladElem = (params) => <ComposeSalad {...params} inventory={this.state.inventory} handleSaladSubmit={this.handleSaladSubmit}/>;
     const viewOrderElem = (params) => <ViewOrder {...params} inputSalad={this.state.list} handleSaladRemove={this.handleSaladRemove}/>;
     return (
       <div>
