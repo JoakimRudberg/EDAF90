@@ -14,6 +14,9 @@ class ViewOrder extends Component {
             <li key={this.props.inputSalad.indexOf(s)} className='list-group-item clearfix' >{s.print()}<button type='button' className='btn btn-danger' onClick={() => this.props.handleSaladRemove(s)}>Ta bort sallad</button></li>)}
         </ol>
         </div>  
+        <div>
+        <button type='button' className='btn btn-primary' onClick={() => this.props.submitOrder()}>Skicka beställning</button>
+        </div>
     </div>
       )
     }

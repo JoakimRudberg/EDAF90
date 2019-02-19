@@ -6,6 +6,7 @@ import "bootstrap/dist/js/bootstrap.js";
 import ViewOrder from "./ViewOrder";
 import './App.css'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Salad from './Salad';
 
 class App extends Component {
   constructor(props) {
@@ -13,34 +14,53 @@ class App extends Component {
     this.state = { list: [], inventory: {} };
     this.handleSaladSubmit = this.handleSaladSubmit.bind(this);
     this.handleSaladRemove = this.handleSaladRemove.bind(this);
+    this.sendToServer = this.sendToServer.bind(this);
+  }
+
+  sendToServer(){
+     fetch("http://localhost:8080/orders/", {
+      crossDomain: true,
+      method: "POST",
+      headers: {'Accept': 'application/json'},
+      body: JSON.stringify(this.state.list)
+    })
+      .then(response => response.json())
+      .then(list => alert(list))
+      
+      this.setState({list: []});
+      window.localStorage.clear();
   }
 
   componentDidMount() {
+    let list = JSON.parse(window.localStorage.getItem('orders'));
+    list.forEach(s => Object.setPrototypeOf(s, Salad.prototype));
+    this.setState({list: list});
+    
     let inventory = {};
-    const URLres = ["foundations", "proteins", "extras", "dressings"];
+    const URLresources = ["foundations", "proteins", "extras", "dressings"];
     Promise.all(
-      URLres.map(res => {
-        const url = new URL(res, "http://localhost:8080/");
-        return fetch(url, {
+      URLresources.map(resource => {
+        const resourceURL = new URL(resource, "http://localhost:8080/");
+        return fetch(resourceURL, {
           method: "GET",
           headers: new Headers(),
           mode: "cors",
           cache: "default"
         })
-          .then(res => res.json())
-          .then(res => {
+          .then(response => response.json())
+          .then(response => {
             Promise.all(
-              res.map(key => {
-                const url2 = new URL(key, url.toString() + "/");
-                return fetch(url2, {
+              response.map(key => {
+                const ingredientURL = new URL(key, resourceURL.toString() + "/");
+                return fetch(ingredientURL, {
                   method: "GET",
                   headers: new Headers(),
                   mode: "cors",
                   cache: "default"
                 })
-                  .then(res => res.json())
-                  .then(res => {
-                    inventory = { ...inventory, [key]: res };
+                  .then(response => response.json())
+                  .then(response => {
+                    inventory = { ...inventory, [key]: response };
                   });
               })
             ).then(() => {
@@ -55,6 +75,7 @@ class App extends Component {
     let temp = [...this.state.list]
     temp.push(s);
     this.setState({ list: temp })
+    window.localStorage.setItem('orders', JSON.stringify(temp));
   }
 
   handleSaladRemove(s) {
@@ -62,11 +83,12 @@ class App extends Component {
     let index = temp.indexOf(s);
     temp.splice(index, 1);
     this.setState({ list: temp });
+    window.localStorage.setItem('orders', JSON.stringify(temp));
   }
 
   render() {
     const composeSaladElem = (params) => <ComposeSalad {...params} inventory={this.state.inventory} handleSaladSubmit={this.handleSaladSubmit} />;
-    const viewOrderElem = (params) => <ViewOrder {...params} inputSalad={this.state.list} handleSaladRemove={this.handleSaladRemove} />;
+    const viewOrderElem = (params) => <ViewOrder {...params} inputSalad={this.state.list} handleSaladRemove={this.handleSaladRemove} submitOrder={this.sendToServer} />;
     return (
       <div>
         <div className="jumbotron text-center">
