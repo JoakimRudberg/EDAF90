@@ -1,0 +1,18 @@
+<div>
+  <h2>Gruppmedlemmar</h2>
+  <ul class="members">
+    <li *ngFor="let person of members" [class.selected]="person === selectedMember" (click)="onSelect(person)">
+      <span class="badge">{{person.id}}</span> {{person.name}}
+    </li>
+  </ul>
+</div>
+
+<div *ngIf="selectedMember">
+<h2>{{selectedMember.name | uppercase}} Details</h2>
+<div><span>id: </span>{{selectedMember.id}}</div>
+<div>
+  <label>name:
+    <input [(ngModel)]="selectedMember.name" placeholder="name">
+  </label>
+</div>
+</div>
