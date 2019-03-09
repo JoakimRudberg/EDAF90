@@ -33,9 +33,10 @@ class App extends Component {
 
   componentDidMount() {
     let list = JSON.parse(window.localStorage.getItem('orders'));
-    list.forEach(s => Object.setPrototypeOf(s, Salad.prototype));
-    this.setState({list: list});
-    
+    if(list != null){
+      list.forEach(s => Object.setPrototypeOf(s, Salad.prototype));
+      this.setState({list: list});
+    }
     let inventory = {};
     const URLresources = ["foundations", "proteins", "extras", "dressings"];
     Promise.all(
